@@ -37,14 +37,14 @@
                 JOptionPane.showMessageDialog(null, "Welcome to Tic-Tac-Toe!");
 
                 while (!game.isGameOver()) {
-                    game.printBoard();
+                    
                     String playerTurn = game.getCurrentTurn();
                     int slot;
                     boolean validMove = false;
                     
                     while (!validMove) {
                         try {
-                            slot = Integer.parseInt(JOptionPane.showInputDialog(playerTurn + "'s turn; enter a slot number to place " + playerTurn + " in:")) - 1;
+                            slot = Integer.parseInt(JOptionPane.showInputDialog(playerTurn + "'s turn; enter a slot number to place " + playerTurn + " in: \n\n" + game.printBoard())) - 1;
                             validMove = game.playerMove(slot);
                             if (!validMove) {
                                 JOptionPane.showMessageDialog(null, "Invalid input. Slot already taken or out of range. Please choose another slot.");
@@ -55,7 +55,7 @@
                     }
                 }
 
-                game.printBoard();
+                JOptionPane.showMessageDialog(null, game.printBoard());
                 String winner = game.checkWinner();
                 if (winner.equals("draw")) 
                     {
@@ -69,6 +69,22 @@
                             playAgain = false;
                         }
                     }
+                    break;
+
+                    case 2: 
+                    String inputStr = JOptionPane.showInputDialog("Input hidden word", null);
+                    Hangman hangman = new Hangman(inputStr);
+
+                    
+
+                    while (true)
+                    {
+                        String str = new String(hangman.getFoundLetters());
+                        inputStr = JOptionPane.showInputDialog("Enter a letter to guess (Lowercase)\n" + str, null);
+                        hangman.guessLetter(inputStr.charAt(0));
+                    }
+                    
+                    // System.out.print(hangman.getFoundLetters());
             }
         }
                         
